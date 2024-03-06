@@ -1,18 +1,14 @@
-# Base image ubuntu 
+# Use the official Ubuntu image as the base image
 FROM ubuntu
+
 # Set working directory
 WORKDIR /usr/src/app
-# Expose port
-EXPOSE 82
-# Install apache
+
+# Update apt-get and install Apache
 RUN apt-get update && apt-get install -y apache2
-# Copy index.html from source code
-COPY ./* /var/www/html
-# # Base image ubuntu 
-# FROM ubuntu
-# # expose port
-# EXPOSE 82
-# # install apache
-# RUN apt-get update && apt-get install -y apache2
-# # copy index.html from  source code
-# COPY /path/to/source/code /var/www/html
+
+# Expose port 82 to allow external access
+EXPOSE 82
+
+# Start Apache service
+CMD ["apache2ctl", "-D", "FOREGROUND"]
